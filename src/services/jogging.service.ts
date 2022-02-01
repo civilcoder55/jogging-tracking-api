@@ -7,8 +7,8 @@ export async function createJogging(joggingData: joggingDocument, userId: string
   return await joggingModel.create(joggingData);
 }
 
-export async function getAllJogging(userId: string, page: string, filter: { from: string; to: string }) {
-  let filterQuery: any = { user: userId, date: {} };
+export async function getAllJogging(page: string, filter: { from: string; to: string }) {
+  const filterQuery: any = { date: {} };
 
   if (filter.from) {
     filterQuery.date.$gte = new Date(filter.from);
@@ -24,8 +24,31 @@ export async function getAllJogging(userId: string, page: string, filter: { from
   return await paginator(joggingModel, page, filterQuery, "-date");
 }
 
-export async function getJoggingById(jogginId: string, userId: string): Promise<joggingDocument> {
-  const jogging = await joggingModel.findOne({ _id: jogginId, user: userId });
+export async function getUserJogging(userId: string, page: string, filter: { from: string; to: string }) {
+  const filterQuery: any = { user: userId, date: {} };
+
+  if (filter.from) {
+    filterQuery.date.$gte = new Date(filter.from);
+  }
+
+  if (filter.to) {
+    filterQuery.date.$lte = new Date(filter.to);
+  }
+
+  if (Object.keys(filterQuery.date).length === 0) {
+    delete filterQuery.date;
+  }
+  return await paginator(joggingModel, page, filterQuery, "-date");
+}
+
+export async function getJogging(jogginId: string, userId: string | null = null): Promise<joggingDocument> {
+  const filterQuery: any = { _id: jogginId };
+
+  if (userId) {
+    filterQuery.user = userId;
+  }
+
+  const jogging = await joggingModel.findOne(filterQuery);
 
   if (jogging) {
     return jogging;
@@ -37,24 +60,12 @@ export async function getJoggingById(jogginId: string, userId: string): Promise<
   };
 }
 
-export async function getWeeklyReport(jogginId: string, userId: string) {
-  //   const jogging = await getJoggingById(jogginId, userId);
-  // implement later
-}
-
-export async function updateJogging(
-  joggingData: joggingDocument,
-  jogginId: string,
-  userId: string
-): Promise<joggingDocument> {
-  const jogging = await getJoggingById(jogginId, userId);
+export async function updateJogging(jogging: joggingDocument, joggingData: joggingDocument): Promise<joggingDocument> {
   Object.assign(jogging, joggingData);
   await jogging.save();
   return jogging;
 }
 
-export async function deleteJogging(jogginId: string, userId: string): Promise<void> {
-  const jogging = await getJoggingById(jogginId, userId);
+export async function deleteJogging(jogging: joggingDocument): Promise<void> {
   await jogging.remove();
-  return;
 }
