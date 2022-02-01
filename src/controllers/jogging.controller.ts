@@ -15,13 +15,13 @@ export async function createJogging(req: Request, res: Response, next: NextFunct
   }
 }
 
-export async function getAllJogging(req: Request, res: Response, next: NextFunction) {
+export async function getUserJogging(req: Request, res: Response, next: NextFunction) {
   try {
     const userId = res.locals.user.userId;
     const page = req.query.page as string;
     const filter = { from: req.query.from as string, to: req.query.to as string };
-    
-    const joggings = await joggingService.getAllJogging(userId, page, filter);
+
+    const joggings = await joggingService.getUserJogging(userId, page, filter);
 
     return res.status(200).json(joggings);
   } catch (error: any) {
@@ -34,20 +34,8 @@ export async function getJogging(req: Request, res: Response, next: NextFunction
     const userId = res.locals.user.userId;
     const joggingId = req.params.id;
 
-    const jogging = await joggingService.getJoggingById(joggingId, userId);
+    const jogging = await joggingService.getJogging(joggingId, userId);
 
-    return res.status(200).json(jogging);
-  } catch (error: any) {
-    next(error);
-  }
-}
-
-export async function getWeeklyReport(req: Request, res: Response, next: NextFunction) {
-  try {
-    const userId = res.locals.user.userId;
-    const joggingId = req.params.id;
-
-    const jogging = await joggingService.getWeeklyReport(joggingId, userId);
     return res.status(200).json(jogging);
   } catch (error: any) {
     next(error);
@@ -60,9 +48,11 @@ export async function updateJogging(req: Request, res: Response, next: NextFunct
     const joggingId = req.params.id;
     const joggingData: joggingDocument = req.body;
 
-    const jogging = await joggingService.updateJogging(joggingData, joggingId, userId);
+    const jogging = await joggingService.getJogging(joggingId, userId);
 
-    return res.status(200).json(jogging);
+    const updatedJogging = await joggingService.updateJogging(jogging, joggingData);
+
+    return res.status(200).json(updatedJogging);
   } catch (error: any) {
     next(error);
   }
@@ -72,7 +62,10 @@ export async function deleteJogging(req: Request, res: Response, next: NextFunct
   try {
     const userId = res.locals.user.userId;
     const joggingId = req.params.id;
-    await joggingService.deleteJogging(joggingId, userId);
+
+    const jogging = await joggingService.getJogging(joggingId, userId);
+
+    await joggingService.deleteJogging(jogging);
 
     return res.status(200).json({ message: "Jogging deleted successfully." });
   } catch (error: any) {
