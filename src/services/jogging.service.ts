@@ -7,8 +7,21 @@ export async function createJogging(joggingData: joggingDocument, userId: string
   return await joggingModel.create(joggingData);
 }
 
-export async function getAllJogging(userId: string, page: string) {
-  return await paginator(joggingModel, page, { user: userId });
+export async function getAllJogging(userId: string, page: string, filter: { from: string; to: string }) {
+  let filterQuery: any = { user: userId, date: {} };
+
+  if (filter.from) {
+    filterQuery.date.$gte = new Date(filter.from);
+  }
+
+  if (filter.to) {
+    filterQuery.date.$lte = new Date(filter.to);
+  }
+
+  if (Object.keys(filterQuery.date).length === 0) {
+    delete filterQuery.date;
+  }
+  return await paginator(joggingModel, page, filterQuery, "-date");
 }
 
 export async function getJoggingById(jogginId: string, userId: string): Promise<joggingDocument> {
