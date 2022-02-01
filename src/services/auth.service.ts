@@ -24,7 +24,7 @@ export async function validateUser(email: string, password: string): Promise<use
 
 export async function createToken(user: userDocument): Promise<string> {
   // generate jwt access token
-  const accessToken = signToken({ userId: user._id, email: user.email });
+  const accessToken = signToken({ userId: user._id, email: user.email, role: user.role });
 
   // store token inside database so can be revoked(logout) [not best practice for high throughput apps]
   await tokenModel.create({ user: user._id, token: accessToken });
