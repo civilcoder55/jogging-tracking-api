@@ -17,5 +17,5 @@ export default async function (req: Request, res: Response, next: NextFunction) 
     }
   }
 
-  return res.status(401).json({ message: "Unauthorized request." });
+  return res.status(403).json({ message: "Forbidden request." });
 }
