@@ -5,6 +5,6 @@ export interface joggingDocument extends mongoose.Document {
   user: userDocument["_id"];
   name: string;
   distance: number; //distance in meters
-  time: number; // time in seconds
+  duration: number; // duration in seconds
   date: Date;
 }

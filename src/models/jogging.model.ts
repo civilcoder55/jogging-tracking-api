@@ -5,7 +5,7 @@ const JoggingSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   name: { type: String },
   distance: { type: Number },
-  time: { type: Number },
+  duration: { type: Number },
   date: { type: Date, default: Date.now },
 });
 
