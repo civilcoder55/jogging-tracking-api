@@ -19,8 +19,9 @@ export async function getAllJogging(req: Request, res: Response, next: NextFunct
   try {
     const userId = res.locals.user.userId;
     const page = req.query.page as string;
-
-    const joggings = await joggingService.getAllJogging(userId, page);
+    const filter = { from: req.query.from as string, to: req.query.to as string };
+    
+    const joggings = await joggingService.getAllJogging(userId, page, filter);
 
     return res.status(200).json(joggings);
   } catch (error: any) {
