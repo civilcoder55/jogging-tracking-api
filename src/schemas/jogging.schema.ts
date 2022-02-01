@@ -23,3 +23,10 @@ export const updateJoggingSchema = object({
     name: string().typeError("name field must be string"),
   }),
 });
+
+export const getAllJoggingSchema = object({
+  query: object({
+    from: date().typeError("from field must be valid date"),
+    to: date().typeError("to field must be valid date"),
+  }),
+});
