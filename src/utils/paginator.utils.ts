@@ -1,11 +1,6 @@
 import { FilterQuery, Model } from "mongoose";
 
-export async function paginator(
-  model: Model<any>,
-  page: string,
-  filter: FilterQuery<any>,
-  sort: string = "-createdAt"
-) {
+export async function paginator(model: Model<any>, page: string, filter: FilterQuery<any>, sort = "-createdAt") {
   let pageNum = parseInt(page) || 1;
   if (pageNum < 0) pageNum = 1;
 
