@@ -1,4 +1,6 @@
 import { userDocument } from "../interfaces/user.interface";
+import joggingModel from "../models/jogging.model";
+import tokenModel from "../models/token.model";
 import userModel from "../models/user.model";
 import { paginator } from "../utils/paginator.utils";
 
@@ -37,8 +39,17 @@ export async function getAllUsers(page: string) {
   return await paginator(userModel, page, {});
 }
 
-export async function updateUser(userId: string, userData: userDocument): Promise<userDocument> {
-  const user = await getUser(userId);
+export async function updateUser(user: userDocument, userData: userDocument): Promise<userDocument> {
+  // check if another user registerd with same email
+  const sameUser = await userModel.findOne({ email: userData.email });
+
+  // if so throw conflict error
+  if (sameUser && sameUser._id != user.id) {
+    throw {
+      statusCode: 409,
+      message: "User email already exists.",
+    };
+  }
 
   Object.assign(user, userData);
 
@@ -47,8 +58,8 @@ export async function updateUser(userId: string, userData: userDocument): Promis
   return user;
 }
 
-export async function deleteUser(userId: string): Promise<void> {
-  const user = await getUser(userId);
-
+export async function deleteUser(user: userDocument): Promise<void> {
+  await tokenModel.deleteMany({ user: user._id });
+  await joggingModel.deleteMany({ user: user._id });
   await user.remove();
 }
