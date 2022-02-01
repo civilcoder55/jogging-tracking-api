@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import * as userService from "../services/user.service";
 import { userDocument } from "../interfaces/user.interface";
-import canAccess from "../policies/user.policy";
 
 export async function createUser(req: Request, res: Response, next: NextFunction) {
   try {
@@ -31,9 +30,6 @@ export async function getUser(req: Request, res: Response, next: NextFunction) {
 
     const user = await userService.getUser(userId);
 
-    // check if user can access this record
-    canAccess(res.locals.user, user);
-
     return res.status(200).json(user);
   } catch (error: any) {
     next(error);
@@ -46,9 +42,6 @@ export async function updateUser(req: Request, res: Response, next: NextFunction
     const userId = req.params.id as string;
 
     const user = await userService.getUser(userId);
-
-    // check if user can access this record
-    canAccess(res.locals.user, user);
 
     const updatedUser = await userService.updateUser(user, userDate);
 
