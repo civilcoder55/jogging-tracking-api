@@ -10,7 +10,7 @@ router.post("/jogging", authMiddleware, validatorMiddleware(createJoggingSchema)
 router.get("/jogging", authMiddleware, validatorMiddleware(getAllJoggingSchema), joggingController.getAllJogging);
 router.get("/jogging/:id", authMiddleware, joggingController.getJoggingById);
 router.get("/jogging/report", authMiddleware, joggingController.getWeeklyReport);
-router.put("/jogging/:id", authMiddleware, validatorMiddleware(updateJoggingSchema), joggingController.updateJogging);
+router.patch("/jogging/:id", authMiddleware, validatorMiddleware(updateJoggingSchema), joggingController.updateJogging);
 router.delete("/jogging/:id", authMiddleware, joggingController.deleteJogging);
 
 export default router;
