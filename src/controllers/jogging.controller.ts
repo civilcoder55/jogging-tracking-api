@@ -29,7 +29,7 @@ export async function getAllJogging(req: Request, res: Response, next: NextFunct
   }
 }
 
-export async function getJoggingById(req: Request, res: Response, next: NextFunction) {
+export async function getJogging(req: Request, res: Response, next: NextFunction) {
   try {
     const userId = res.locals.user.userId;
     const joggingId = req.params.id;
