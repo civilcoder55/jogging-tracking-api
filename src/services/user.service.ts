@@ -1,5 +1,6 @@
 import { userDocument } from "../interfaces/user.interface";
 import userModel from "../models/user.model";
+import { paginator } from "../utils/paginator.utils";
 
 export async function createUser(userData: userDocument): Promise<userDocument> {
   // check if another user registerd with same email
@@ -29,4 +30,25 @@ export async function getUser(id: string): Promise<userDocument> {
   }
 
   return user;
+}
+
+export async function getAllUsers(page: string) {
+  //fetch all users from database with pagination
+  return await paginator(userModel, page, {});
+}
+
+export async function updateUser(userId: string, userData: userDocument): Promise<userDocument> {
+  const user = await getUser(userId);
+
+  Object.assign(user, userData);
+
+  await user.save();
+
+  return user;
+}
+
+export async function deleteUser(userId: string): Promise<void> {
+  const user = await getUser(userId);
+
+  await user.remove();
 }
