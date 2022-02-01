@@ -7,8 +7,6 @@ export async function createJogging(req: Request, res: Response, next: NextFunct
     const joggingData: joggingDocument = req.body;
     const userId = res.locals.user.userId;
 
-    console.log(joggingData.date);
-
     const jogging = await joggingService.createJogging(joggingData, userId);
 
     return res.status(201).json(jogging);
@@ -20,8 +18,9 @@ export async function createJogging(req: Request, res: Response, next: NextFunct
 export async function getAllJogging(req: Request, res: Response, next: NextFunction) {
   try {
     const userId = res.locals.user.userId;
+    const page = req.query.page as string;
 
-    const joggings = await joggingService.getAllJogging(userId);
+    const joggings = await joggingService.getAllJogging(userId, page);
 
     return res.status(200).json(joggings);
   } catch (error: any) {

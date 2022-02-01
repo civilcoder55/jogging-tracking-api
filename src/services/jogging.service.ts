@@ -1,13 +1,14 @@
 import { joggingDocument } from "../interfaces/jogging.interface";
 import joggingModel from "../models/jogging.model";
+import { paginator } from "../utils/paginator.utils";
 
 export async function createJogging(joggingData: joggingDocument, userId: string): Promise<joggingDocument> {
   joggingData.user = userId;
   return await joggingModel.create(joggingData);
 }
 
-export async function getAllJogging(userId: string): Promise<joggingDocument[]> {
-  return await joggingModel.find({ user: userId });
+export async function getAllJogging(userId: string, page: string) {
+  return await paginator(joggingModel, page, { user: userId });
 }
 
 export async function getJoggingById(jogginId: string, userId: string): Promise<joggingDocument> {
