@@ -1,5 +1,17 @@
 import { Request, Response, NextFunction } from "express";
+import { userDocument } from "../interfaces/user.interface";
 import * as authService from "../services/auth.service";
+import { createUser } from "../services/user.service";
+
+export async function register(req: Request, res: Response, next: NextFunction) {
+  try {
+    const userData: userDocument = req.body;
+    const user = await createUser(userData);
+    return res.status(201).json(user);
+  } catch (error: any) {
+    next(error);
+  }
+}
 
 export async function login(req: Request, res: Response, next: NextFunction) {
   try {
