@@ -1,6 +1,6 @@
 import { FilterQuery, Model } from "mongoose";
 
-export async function paginator(model: Model<any>, page: string, filter: FilterQuery<any>) {
+export async function paginator(model: Model<any>, page: string, filter: FilterQuery<any>, sort: string) {
   let pageNum = parseInt(page) || 1;
   if (pageNum < 0) pageNum = 1;
 
@@ -14,7 +14,11 @@ export async function paginator(model: Model<any>, page: string, filter: FilterQ
 
   const offset = (pageNum - 1) * limit;
 
-  const records = await model.find(filter).sort("-createdAt").skip(offset).limit(10);
+  const records = await model
+    .find(filter)
+    .sort(sort || "-createdAt")
+    .skip(offset)
+    .limit(10);
 
   return { results: records, pagination: { totalPages, hasNext, hasPerv, pageNum, totalRecords } };
 }
