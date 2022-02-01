@@ -16,17 +16,12 @@ router.post(
   userController.createUser
 );
 router.get("/users", authMiddleware, guardMiddleware([ROLES.MANAGER, ROLES.ADMIN]), userController.getAllUsers);
-router.get(
-  "/users/:id",
-  authMiddleware,
-  guardMiddleware([ROLES.USER, ROLES.MANAGER, ROLES.ADMIN]),
-  userController.getUser
-);
+router.get("/users/:id", authMiddleware, guardMiddleware([ROLES.MANAGER, ROLES.ADMIN]), userController.getUser);
 router.patch(
   "/users/:id",
   authMiddleware,
   validatorMiddleware(updateUserSchema),
-  guardMiddleware([ROLES.USER, ROLES.MANAGER, ROLES.ADMIN]),
+  guardMiddleware([ROLES.MANAGER, ROLES.ADMIN]),
   userController.updateUser
 );
 router.delete("/users/:id", authMiddleware, guardMiddleware([ROLES.MANAGER, ROLES.ADMIN]), userController.deleteUser);
