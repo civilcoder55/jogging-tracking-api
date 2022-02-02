@@ -1,10 +1,13 @@
 import { joggingDocument } from "../interfaces/jogging.interface";
 import joggingModel from "../models/jogging.model";
 import { paginator } from "../utils/paginator.utils";
+import { updateReportWithDeleted, updateReportWithNew, updateReportWithOld } from "./report.service";
 
 export async function createJogging(joggingData: joggingDocument, userId: string): Promise<joggingDocument> {
   joggingData.user = userId;
-  return await joggingModel.create(joggingData);
+  const jogging = await joggingModel.create(joggingData);
+  await updateReportWithNew(jogging);
+  return jogging;
 }
 
 export async function getAllJogging(page: string, filter: { from: string; to: string }) {
@@ -61,11 +64,15 @@ export async function getJogging(jogginId: string, userId: string | null = null)
 }
 
 export async function updateJogging(jogging: joggingDocument, joggingData: joggingDocument): Promise<joggingDocument> {
+  const oldJogging = { ...jogging.toObject() } as joggingDocument;
   Object.assign(jogging, joggingData);
-  await jogging.save();
+  const newJogging = await jogging.save();
+  await updateReportWithOld(oldJogging, newJogging);
+
   return jogging;
 }
 
 export async function deleteJogging(jogging: joggingDocument): Promise<void> {
+  await updateReportWithDeleted(jogging);
   await jogging.remove();
 }
