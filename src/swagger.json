@@ -1,0 +1,1475 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Jogging Tracking API",
+    "description": "Demo CRUD Jogging API.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/v1",
+      "description": "local API Server"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Register new account",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["name", "email", "password", "passwordConfirmation"],
+                "properties": {
+                  "name": {
+                    "description": "User name",
+                    "type": "string",
+                    "example": "john doe"
+                  },
+                  "email": {
+                    "description": "User email",
+                    "type": "string",
+                    "format": "email",
+                    "example": "john@test.com"
+                  },
+                  "password": {
+                    "description": "User password",
+                    "type": "string",
+                    "format": "password",
+                    "example": "Password@123"
+                  },
+                  "passwordConfirmation": {
+                    "description": "User password confirmation",
+                    "type": "string",
+                    "format": "password",
+                    "example": "Password@123"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["email", "password"],
+                "properties": {
+                  "email": {
+                    "description": "User email",
+                    "type": "string",
+                    "format": "email",
+                    "example": "john@test.com"
+                  },
+                  "password": {
+                    "description": "User password",
+                    "type": "string",
+                    "format": "password",
+                    "example": "Password@123"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accessToken": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "logout",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Success."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/profile": {
+      "get": {
+        "tags": ["Profile"],
+        "summary": "Get Profile Info",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": ["Profile"],
+        "summary": "Update profile info",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["name", "email"],
+                "properties": {
+                  "name": {
+                    "description": "User name",
+                    "type": "string",
+                    "example": "john doe"
+                  },
+                  "email": {
+                    "description": "User email",
+                    "type": "string",
+                    "format": "email",
+                    "example": "john@test.com"
+                  },
+                  "password": {
+                    "description": "User password",
+                    "type": "string",
+                    "format": "password",
+                    "example": "Password@123"
+                  },
+                  "passwordConfirmation": {
+                    "description": "User password confirmation",
+                    "type": "string",
+                    "format": "password",
+                    "example": "Password@123"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Success."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Profile"],
+        "summary": "Delete profile",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Profile deleted successfully."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get list of all users",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["name", "email", "password", "passwordConfirmation"],
+                "properties": {
+                  "name": {
+                    "description": "User name",
+                    "type": "string",
+                    "example": "john doe"
+                  },
+                  "email": {
+                    "description": "User email",
+                    "type": "string",
+                    "format": "email",
+                    "example": "john@test.com"
+                  },
+                  "password": {
+                    "description": "User password",
+                    "type": "string",
+                    "format": "password",
+                    "example": "Password@123"
+                  },
+                  "passwordConfirmation": {
+                    "description": "User password confirmation",
+                    "type": "string",
+                    "format": "password",
+                    "example": "Password@123"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get user data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Update user data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["name", "email"],
+                "properties": {
+                  "name": {
+                    "description": "User name",
+                    "type": "string",
+                    "example": "john doe"
+                  },
+                  "email": {
+                    "description": "User email",
+                    "type": "string",
+                    "format": "email",
+                    "example": "john@test.com"
+                  },
+                  "password": {
+                    "description": "User password",
+                    "type": "string",
+                    "format": "password",
+                    "example": "Password@123"
+                  },
+                  "passwordConfirmation": {
+                    "description": "User password confirmation",
+                    "type": "string",
+                    "format": "password",
+                    "example": "Password@123"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Delete user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Check id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User deleted successfully."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "You can't delete yourself."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/jogging": {
+      "get": {
+        "tags": ["User Jogging"],
+        "summary": "Get list of logged user jogging",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "filter by date range",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "filter by date range",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Jogging"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["User Jogging"],
+        "summary": "Create new jogging",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["name", "distance", "duration"],
+                "properties": {
+                  "name": {
+                    "title": "name",
+                    "description": "Jogging name.",
+                    "type": "string",
+                    "example": "first day"
+                  },
+                  "distance": {
+                    "title": "distance",
+                    "description": "The distance [in meters] traveled in the jogging.",
+                    "type": "integer",
+                    "example": 120
+                  },
+                  "duration": {
+                    "title": "duration",
+                    "description": "The duration [in seconds] spent in the jogging.",
+                    "type": "integer",
+                    "example": 120
+                  },
+                  "date": {
+                    "description": "The jogging date (optional). default is now",
+                    "type": "string",
+                    "example": "2022-01-24T14:43:32.337Z"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Jogging created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Jogging"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/jogging/{id}": {
+      "get": {
+        "tags": ["User Jogging"],
+        "summary": "Get jogging data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Jogging id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Jogging"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": ["User Jogging"],
+        "summary": "Update jogging data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Jogging id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "title": "name",
+                    "description": "Jogging name.",
+                    "type": "string",
+                    "example": "first day"
+                  },
+                  "distance": {
+                    "title": "distance",
+                    "description": "The distance [in meters] traveled in the jogging.",
+                    "type": "integer",
+                    "example": 120
+                  },
+                  "duration": {
+                    "title": "duration",
+                    "description": "The duration [in seconds] spent in the jogging.",
+                    "type": "integer",
+                    "example": 120
+                  },
+                  "date": {
+                    "description": "The jogging date (optional). default is now",
+                    "type": "string",
+                    "example": "2022-01-24T14:43:32.337Z"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Jogging"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["User Jogging"],
+        "summary": "Delete jogging",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Jogging id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Jogging deleted successfully."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/admin/jogging": {
+      "get": {
+        "tags": ["Admin Jogging"],
+        "summary": "Get list of all users jogging",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "filter by date range",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "filter by date range",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Jogging"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/admin/jogging/{id}": {
+      "get": {
+        "tags": ["Admin Jogging"],
+        "summary": "Get jogging data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Jogging id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Jogging"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": ["Admin Jogging"],
+        "summary": "Update jogging data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Jogging id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "title": "name",
+                    "description": "Jogging name.",
+                    "type": "string",
+                    "example": "first day"
+                  },
+                  "distance": {
+                    "title": "distance",
+                    "description": "The distance [in meters] traveled in the jogging.",
+                    "type": "integer",
+                    "example": 120
+                  },
+                  "duration": {
+                    "title": "duration",
+                    "description": "The duration [in seconds] spent in the jogging.",
+                    "type": "integer",
+                    "example": 120
+                  },
+                  "date": {
+                    "description": "The jogging date (optional). default is now",
+                    "type": "string",
+                    "example": "2022-01-24T14:43:32.337Z"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Jogging"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Admin Jogging"],
+        "summary": "Delete jogging",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Jogging id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Jogging deleted successfully."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/reports": {
+      "get": {
+        "tags": ["Reports"],
+        "summary": "Get Jogging Weekly Reports",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "all",
+            "in": "query",
+            "description": "get all week reports if not will get last week only",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Report"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "title": "User Model",
+        "properties": {
+          "_id": {
+            "description": "User id",
+            "type": "string",
+            "example": "61eebb148bf55b4ca50db549"
+          },
+          "name": {
+            "description": "User name",
+            "type": "string",
+            "example": "john doe"
+          },
+          "email": {
+            "description": "User email",
+            "type": "string",
+            "format": "email",
+            "example": "john@test.com"
+          },
+          "createdAt": {
+            "description": "User creation date",
+            "type": "string",
+            "example": "2022-01-24T14:43:32.337Z"
+          },
+          "updatedAt": {
+            "description": "User update date",
+            "type": "string",
+            "example": "2022-01-24T14:43:32.337Z"
+          }
+        },
+        "type": "object"
+      },
+      "Jogging": {
+        "title": "Jogging Model",
+        "properties": {
+          "_id": {
+            "description": "Jogging id",
+            "type": "string",
+            "example": "61eebb148bf55b4ca50db549"
+          },
+          "name": {
+            "title": "name",
+            "description": "Jogging name.",
+            "type": "string",
+            "example": "first day"
+          },
+          "distance": {
+            "title": "distance",
+            "description": "The distance [in meters] traveled in the jogging.",
+            "type": "integer",
+            "example": 120
+          },
+          "duration": {
+            "title": "duration",
+            "description": "The duration [in seconds] spent in the jogging.",
+            "type": "integer",
+            "example": 120
+          },
+          "date": {
+            "description": "The jogging date (optional). default is now",
+            "type": "string",
+            "example": "2022-01-24T14:43:32.337Z"
+          }
+        },
+        "type": "object"
+      },
+      "Report": {
+        "title": "Report Model",
+        "properties": {
+          "_id": {
+            "description": "User id",
+            "type": "string",
+            "example": "61eebb148bf55b4ca50db549"
+          },
+          "weekDate": {
+            "description": "Weekly report date [week start date]",
+            "type": "string",
+            "example": "2022-01-24T14:43:32.337Z"
+          },
+          "totalDistance": {
+            "title": "totalDistance",
+            "description": "The total distance [in meters] traveled whole week.",
+            "type": "integer",
+            "example": 120
+          },
+          "totalDuration": {
+            "title": "totalDuration",
+            "description": "The total duration [in seconds] spent whole week.",
+            "type": "integer",
+            "example": 120
+          },
+          "avgSpeed": {
+            "title": "distance",
+            "description": "The average speed [in meters/seconds] during the week.",
+            "type": "number",
+            "example": 1
+          },
+          "createdAt": {
+            "description": "Report creation date",
+            "type": "string",
+            "example": "2022-01-24T14:43:32.337Z"
+          },
+          "updatedAt": {
+            "description": "Report update date",
+            "type": "string",
+            "example": "2022-01-24T14:43:32.337Z"
+          }
+        }
+      },
+      "Pagination": {
+        "title": "Pagination Model",
+        "properties": {
+          "totalPages": {
+            "title": "totalPages",
+            "description": "The total pages of check documents.",
+            "type": "integer",
+            "example": 3
+          },
+          "hasNext": {
+            "title": "hasNext",
+            "description": "Is there next pages.",
+            "type": "boolean",
+            "example": true
+          },
+          "hasPerv": {
+            "title": "hasPerv",
+            "description": "Is there previous pages.",
+            "type": "boolean",
+            "example": false
+          },
+          "pageNum": {
+            "title": "pageNum",
+            "description": "The current page number.",
+            "type": "integer",
+            "example": 1
+          },
+          "totalRecords": {
+            "title": "totalRecords",
+            "description": "Total documents number.",
+            "type": "integer",
+            "example": 27
+          }
+        },
+        "type": "object"
+      }
+    },
+    "responses": {
+      "400": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "some field is required."
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized request."
+                }
+              }
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Forbidden request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Forbidden request."
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not found resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Resource not found."
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Internal server error."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
