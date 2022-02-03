@@ -1,11 +1,11 @@
 import request from "supertest";
 import app from "../../app";
+import database from "./database";
+import SeedData from "./seed.data";
 import joggingModel from "../../models/jogging.model";
 import reportModel from "../../models/report.model";
 import tokenModel from "../../models/token.model";
 import userModel from "../../models/user.model";
-import database from "./database";
-import SeedData from "./seed.data";
 
 const basePath = "/api/v1";
 
