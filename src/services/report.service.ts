@@ -52,7 +52,7 @@ export async function updateReportWithDeleted(jogging: joggingDocument): Promise
 }
 
 export async function getReports(userId: string, page: string, all: string) {
-  if (all) {
+  if (all && all == "true") {
     return await paginator(reportModel, page, { user: userId }, "-weekDate");
   }
   const date = new Date();
