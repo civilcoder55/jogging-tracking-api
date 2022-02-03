@@ -1,0 +1,787 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2022-02-03T15:00:57.057Z",
+  "__export_source": "insomnia.desktop.app:v2021.6.0",
+  "resources": [
+    {
+      "_id": "req_d8b5cee6ad3a4c54bab3c089d6e39c7c",
+      "parentId": "fld_95c20a3fdafc464ebf349d081108967d",
+      "modified": 1643900185330,
+      "created": 1643759872045,
+      "url": "{{ _.baseUrl }}/api/v1/reports",
+      "name": "Get Jogging Weekly Reports",
+      "description": "",
+      "method": "GET",
+      "body": { "mimeType": "application/json", "text": "" },
+      "parameters": [
+        {
+          "id": "pair_dfd611f181b94bbdae23585e67456325",
+          "name": "page",
+          "value": "2",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "id": "pair_8aaf06e92c6843c28cdd85a8a4bb578d",
+          "name": "all",
+          "value": "true",
+          "description": "",
+          "disabled": true
+        }
+      ],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}",
+        "disabled": false
+      },
+      "metaSortKey": -1643759860980,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_95c20a3fdafc464ebf349d081108967d",
+      "parentId": "wrk_3902c68c65874346887f620b29e1871c",
+      "modified": 1643759841755,
+      "created": 1643759841755,
+      "name": "Report",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1643759841755,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_3902c68c65874346887f620b29e1871c",
+      "parentId": null,
+      "modified": 1643709381332,
+      "created": 1643709381332,
+      "name": "Jogging-tracking-api",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_a98df2f4a1f745af89cff798e2fef8d0",
+      "parentId": "fld_f877439478d943bcb2201c2828907baf",
+      "modified": 1643895932461,
+      "created": 1643727574085,
+      "url": "{{ _.baseUrl }}/api/v1/jogging",
+      "name": "Create New Jogging",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"first jogging\",\n\t\"distance\": 150,\n\t\"duration\": 150\n}"
+      },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1643031484157.25,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_f877439478d943bcb2201c2828907baf",
+      "parentId": "fld_4bebd37de8374d76973109c0c27a5728",
+      "modified": 1643759504321,
+      "created": 1643759504321,
+      "name": "User",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1643759504321,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_4bebd37de8374d76973109c0c27a5728",
+      "parentId": "wrk_3902c68c65874346887f620b29e1871c",
+      "modified": 1643727565917,
+      "created": 1643727565917,
+      "name": "Jogging",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1643727565917,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_3a4df19107114460800c9399cba00f3a",
+      "parentId": "fld_f877439478d943bcb2201c2828907baf",
+      "modified": 1643895734867,
+      "created": 1643729438592,
+      "url": "{{ _.baseUrl }}/api/v1/jogging",
+      "name": "Get My Jogging",
+      "description": "",
+      "method": "GET",
+      "body": { "mimeType": "application/json", "text": "" },
+      "parameters": [
+        { "id": "pair_dfd611f181b94bbdae23585e67456325", "name": "page", "value": "1", "description": "" },
+        {
+          "id": "pair_cc051c7b1bfe44638e1dcb76f2625654",
+          "name": "from",
+          "value": "01/29/2022",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "id": "pair_fa37ea0c22af45e888c37410c54ee2ac",
+          "name": "to",
+          "value": "02/01/2022",
+          "description": "",
+          "disabled": true
+        }
+      ],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}",
+        "disabled": false
+      },
+      "metaSortKey": -1643031484107.25,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f0fafb18603c494e98f72c1d1338b4ad",
+      "parentId": "fld_f877439478d943bcb2201c2828907baf",
+      "modified": 1643895737682,
+      "created": 1643729452272,
+      "url": "{{ _.baseUrl }}/api/v1/jogging/{% response 'body', 'req_a98df2f4a1f745af89cff798e2fef8d0', 'b64::JC5faWQ=::46b', 'never', 60 %}",
+      "name": "Get Jogging By Id",
+      "description": "",
+      "method": "GET",
+      "body": { "mimeType": "application/json", "text": "" },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1643031484057.25,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_30f68b9c4b42426f82a690075154e964",
+      "parentId": "fld_f877439478d943bcb2201c2828907baf",
+      "modified": 1643895741331,
+      "created": 1643729513372,
+      "url": "{{ _.baseUrl }}/api/v1/jogging/{% response 'body', 'req_a98df2f4a1f745af89cff798e2fef8d0', 'b64::JC5faWQ=::46b', 'never', 60 %}",
+      "name": "Update Jogging",
+      "description": "",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"updated jogging\",\n\t\"distance\": 120,\n\t\"duration\": 120\n}"
+      },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1643031484007.25,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_7b95c3e63e8b4f80b2b93a9867833a14",
+      "parentId": "fld_f877439478d943bcb2201c2828907baf",
+      "modified": 1643895744746,
+      "created": 1643729522719,
+      "url": "{{ _.baseUrl }}/api/v1/jogging/{% response 'body', 'req_a98df2f4a1f745af89cff798e2fef8d0', 'b64::JC5faWQ=::46b', 'never', 60 %}",
+      "name": "Delete Jogging",
+      "description": "",
+      "method": "DELETE",
+      "body": { "mimeType": "application/json", "text": "" },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1643031483957.25,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f359a007f3164389b7332bfa4a32daa8",
+      "parentId": "fld_9c23b09c40fe4bfabe88571bf884c300",
+      "modified": 1643895910853,
+      "created": 1643759438197,
+      "url": "{{ _.baseUrl }}/api/v1/admin/jogging",
+      "name": "Get All Jogging",
+      "description": "",
+      "method": "GET",
+      "body": { "mimeType": "application/json", "text": "" },
+      "parameters": [
+        { "id": "pair_dfd611f181b94bbdae23585e67456325", "name": "page", "value": "1", "description": "" },
+        {
+          "id": "pair_cc051c7b1bfe44638e1dcb76f2625654",
+          "name": "from",
+          "value": "01/29/2022",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "id": "pair_fa37ea0c22af45e888c37410c54ee2ac",
+          "name": "to",
+          "value": "02/01/2022",
+          "description": "",
+          "disabled": true
+        }
+      ],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}",
+        "disabled": false
+      },
+      "metaSortKey": -1642890241439.5938,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_9c23b09c40fe4bfabe88571bf884c300",
+      "parentId": "fld_4bebd37de8374d76973109c0c27a5728",
+      "modified": 1643759425393,
+      "created": 1643759425393,
+      "name": "Admin",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1643759425393,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_f9765bd6501d4d368ba71e1699495c79",
+      "parentId": "fld_9c23b09c40fe4bfabe88571bf884c300",
+      "modified": 1643895936495,
+      "created": 1643759453549,
+      "url": "{{ _.baseUrl }}/api/v1/admin/jogging/{% response 'body', 'req_a98df2f4a1f745af89cff798e2fef8d0', 'b64::JC5faWQ=::46b', 'never', 60 %}",
+      "name": "Get Jogging By Id",
+      "description": "",
+      "method": "GET",
+      "body": { "mimeType": "application/json", "text": "" },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1642890241389.5938,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f1e84ee8d95d40479eee0aeb03a606d4",
+      "parentId": "fld_9c23b09c40fe4bfabe88571bf884c300",
+      "modified": 1643895942321,
+      "created": 1643759462988,
+      "url": "{{ _.baseUrl }}/api/v1/admin/jogging/{% response 'body', 'req_a98df2f4a1f745af89cff798e2fef8d0', 'b64::JC5faWQ=::46b', 'never', 60 %}",
+      "name": "Update Jogging",
+      "description": "",
+      "method": "PATCH",
+      "body": { "mimeType": "application/json", "text": "{\n\t\"name\": \"second time\"\n}" },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1642890241339.5938,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_955466085c4247e39670bfefc6ce2dc6",
+      "parentId": "fld_9c23b09c40fe4bfabe88571bf884c300",
+      "modified": 1643895948588,
+      "created": 1643759469968,
+      "url": "{{ _.baseUrl }}/api/v1/admin/jogging/{% response 'body', 'req_a98df2f4a1f745af89cff798e2fef8d0', 'b64::JC5faWQ=::46b', 'never', 60 %}",
+      "name": "Delete Jogging",
+      "description": "",
+      "method": "DELETE",
+      "body": { "mimeType": "application/json", "text": "" },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1642890241289.5938,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_e46256ce8d2d420bb4cba40141f4547e",
+      "parentId": "fld_c2743d54aa38423b8eb981f509296774",
+      "modified": 1643896003133,
+      "created": 1643709449682,
+      "url": "{{ _.baseUrl }}/api/v1/users",
+      "name": "Create New User",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\" : \"user by admin\",\n\t\"email\" : \"created_user@example.com\",\n\t\"password\" : \"Password@123\",\n\t\"passwordConfirmation\" : \"Password@123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1643709449682,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_c2743d54aa38423b8eb981f509296774",
+      "parentId": "wrk_3902c68c65874346887f620b29e1871c",
+      "modified": 1643752064284,
+      "created": 1643709433400,
+      "name": "Users",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1643709433400,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_ee2215da7cde4b4e860a45cfdb4b1ba3",
+      "parentId": "fld_c2743d54aa38423b8eb981f509296774",
+      "modified": 1643896001141,
+      "created": 1643746596043,
+      "url": "{{ _.baseUrl }}/api/v1/users/",
+      "name": "Get All Users",
+      "description": "",
+      "method": "GET",
+      "body": { "mimeType": "application/json", "text": "" },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1643483461173.75,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_d88b9cfec9fe4d15be8b491ace13b608",
+      "parentId": "fld_c2743d54aa38423b8eb981f509296774",
+      "modified": 1643896069075,
+      "created": 1643709461076,
+      "url": "{{ _.baseUrl }}/api/v1/users/{% response 'body', 'req_e46256ce8d2d420bb4cba40141f4547e', 'b64::JC5faWQ=::46b', 'never', 60 %}",
+      "name": "Get User By Id",
+      "description": "",
+      "method": "GET",
+      "body": { "mimeType": "application/json", "text": "" },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1643257472665.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_53976723bdea4474a19b8679a72841b4",
+      "parentId": "fld_c2743d54aa38423b8eb981f509296774",
+      "modified": 1643896085698,
+      "created": 1643746575626,
+      "url": "{{ _.baseUrl }}/api/v1/users/{% response 'body', 'req_e46256ce8d2d420bb4cba40141f4547e', 'b64::JC5faWQ=::46b', 'never', 60 %}",
+      "name": "Update User By Id",
+      "description": "",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\" : \"user by admin\",\n\t\"email\" : \"created_user@example.com\",\n\t\"password\" : \"NewPassword@123\",\n\t\"passwordConfirmation\" : \"NewPassword@123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1643144478411.375,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_ff5ff31fe3d14888a789d3219b5d6f61",
+      "parentId": "fld_c2743d54aa38423b8eb981f509296774",
+      "modified": 1643896099852,
+      "created": 1643746581842,
+      "url": "{{ _.baseUrl }}/api/v1/users/{% response 'body', 'req_e46256ce8d2d420bb4cba40141f4547e', 'b64::JC5faWQ=::46b', 'never', 60 %}",
+      "name": "Delete User By Id",
+      "description": "",
+      "method": "DELETE",
+      "body": { "mimeType": "application/json", "text": "" },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1643087981284.3125,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_1df962d9d6574513af0ca9863cc45765",
+      "parentId": "fld_2d71840f190f4ce587b3fb6b9171708f",
+      "modified": 1643897987755,
+      "created": 1643752091091,
+      "url": "{{ _.baseUrl }}/api/v1/profile",
+      "name": "Get My Profile Info",
+      "description": "",
+      "method": "GET",
+      "body": { "mimeType": "application/json", "text": "" },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1643200975538.4375,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_2d71840f190f4ce587b3fb6b9171708f",
+      "parentId": "wrk_3902c68c65874346887f620b29e1871c",
+      "modified": 1643752077809,
+      "created": 1643752074998,
+      "name": "Profile",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1643709431205.5,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_d7610ef292594b1f89e2a19156d4baad",
+      "parentId": "fld_2d71840f190f4ce587b3fb6b9171708f",
+      "modified": 1643895684641,
+      "created": 1643752104276,
+      "url": "{{ _.baseUrl }}/api/v1/profile",
+      "name": "Update My Profile",
+      "description": "",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"new name\",\n\t\"email\" : \"new_email@example.com\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1643172726974.9062,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_30a4d1ea371d4dcbaeb02251b68901ec",
+      "parentId": "fld_2d71840f190f4ce587b3fb6b9171708f",
+      "modified": 1643898266271,
+      "created": 1643752134292,
+      "url": "{{ _.baseUrl }}/api/v1/profile",
+      "name": "Delete My Profile",
+      "description": "",
+      "method": "DELETE",
+      "body": { "mimeType": "application/json", "text": "" },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_8b673a197b404b71b8da1c77b4d638fd" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1643158602693.1406,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_547c76ca5452403a8503eac3a1a36486",
+      "parentId": "fld_74a57637a03343508d7047d3cffd04d2",
+      "modified": 1643895696810,
+      "created": 1643746691500,
+      "url": "{{ _.baseUrl }}/api/v1/auth/register",
+      "name": "Register",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\" : \"user\",\n\t\"email\" : \"user@example.com\",\n\t\"password\" : \"Password@123\",\n\t\"passwordConfirmation\" : \"Password@123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_98c80210b06c48eab38253ed145f9f0d" }
+      ],
+      "authentication": {},
+      "metaSortKey": -1643709527999,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_74a57637a03343508d7047d3cffd04d2",
+      "parentId": "wrk_3902c68c65874346887f620b29e1871c",
+      "modified": 1643709511175,
+      "created": 1643709429011,
+      "name": "Auth",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1643709429011,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_78e7820c6e384756bf553cd8efaddb8b",
+      "parentId": "fld_74a57637a03343508d7047d3cffd04d2",
+      "modified": 1643895907736,
+      "created": 1643709527949,
+      "url": "{{ _.baseUrl }}/api/v1/auth/login",
+      "name": "Login",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"user@example.com\",\n\t\"password\": \"Password@123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_98c80210b06c48eab38253ed145f9f0d" }
+      ],
+      "authentication": {},
+      "metaSortKey": -1643709527949,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_a3221ca2784841299ec6f7021d34f184",
+      "parentId": "fld_74a57637a03343508d7047d3cffd04d2",
+      "modified": 1643897953757,
+      "created": 1643709541844,
+      "url": "{{ _.baseUrl }}/api/v1/auth/logout",
+      "name": "Logout",
+      "description": "",
+      "method": "POST",
+      "body": { "mimeType": "application/json", "text": "" },
+      "parameters": [],
+      "headers": [
+        { "name": "Content-Type", "value": "application/json", "id": "pair_98c80210b06c48eab38253ed145f9f0d" }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_78e7820c6e384756bf553cd8efaddb8b', 'b64::JC5hY2Nlc3NUb2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1643709488815.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_dc736f78d5acde15ce23baabfff4dd2b63089601",
+      "parentId": "wrk_3902c68c65874346887f620b29e1871c",
+      "modified": 1643709419676,
+      "created": 1643709381337,
+      "name": "Base Environment",
+      "data": { "baseUrl": "127.0.0.1:3000" },
+      "dataPropertyOrder": { "&": ["baseUrl"] },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1643709381337,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_dc736f78d5acde15ce23baabfff4dd2b63089601",
+      "parentId": "wrk_3902c68c65874346887f620b29e1871c",
+      "modified": 1643709381338,
+      "created": 1643709381338,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_ea1fcbf553464fe38c722b03747777c3",
+      "parentId": "wrk_3902c68c65874346887f620b29e1871c",
+      "modified": 1643709381333,
+      "created": 1643709381333,
+      "fileName": "Jogging-tracking-api",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    }
+  ]
+}
