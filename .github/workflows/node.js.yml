@@ -1,0 +1,31 @@
+name: Jogging app CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: create env file
+      run: |
+        touch .env
+        echo ACCESS_TOKEN_TTL='10m' >> .env
+        echo ACCESS_TOKEN_SECRET_KEY='SvT4hmSMy3GptPScYx3ZCxvYJVrfKuc3' >> .env
+    - run: npm ci
+    - run: npm test
+    - run: npm run build
+      env:
+        CI: true
