@@ -7,23 +7,10 @@ dotenv.config();
 /**
  * Modules imports
  */
-import express from "express";
 import logger from "./utils/logger.util";
 import * as db from "./database";
-import routes from "./routes";
+import app from "./app";
 import config from "./config";
-import notFoundHandlerMiddleware from "./middlewares/notFoundHandler.middleware";
-import errorHandlerMiddleware from "./middlewares/errorHandler.middleware";
-
-/**
- * connect to database
- */
-db.connect();
-
-/**
- * init server
- */
-const app = express();
 
 /**
  * App Variables
@@ -31,20 +18,9 @@ const app = express();
 const APP_PORT: number = config.APP_PORT;
 
 /**
- *  app middlewares
+ * connect to database
  */
-app.use(express.json());
-
-/**
- * Register app routes
- */
-app.use("/api/v1", routes);
-
-/**
- * Global error handlers
- */
-app.use(notFoundHandlerMiddleware); // for not exists routes
-app.use(errorHandlerMiddleware); // for handling errors
+db.connect();
 
 /**
  * start server
