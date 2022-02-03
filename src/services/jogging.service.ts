@@ -53,14 +53,14 @@ export async function getJogging(jogginId: string, userId: string | null = null)
 
   const jogging = await joggingModel.findOne(filterQuery);
 
-  if (jogging) {
-    return jogging;
+  if (!jogging) {
+    throw {
+      statusCode: 404,
+      message: "Jogging not found.",
+    };
   }
-
-  throw {
-    statusCode: 404,
-    message: "Jogging not found.",
-  };
+  return jogging;
+  
 }
 
 export async function updateJogging(jogging: joggingDocument, joggingData: joggingDocument): Promise<joggingDocument> {
