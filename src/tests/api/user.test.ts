@@ -94,6 +94,11 @@ test("Should crud users as manager user", async () => {
     .patch(basePath + "/users/" + SeedData.testUserId)
     .set("Authorization", `Bearer ${SeedData.managerUserToken.token}`)
     .expect(400);
+
+  await request(app)
+    .delete(basePath + "/users/" + SeedData.testUserId)
+    .set("Authorization", `Bearer ${SeedData.managerUserToken.token}`)
+    .expect(200);
 });
 
 test("Should crud users as admin user", async () => {
@@ -116,6 +121,11 @@ test("Should crud users as admin user", async () => {
     .patch(basePath + "/users/" + SeedData.testUserId)
     .set("Authorization", `Bearer ${SeedData.adminUserToken.token}`)
     .expect(400);
+
+  await request(app)
+    .delete(basePath + "/users/" + SeedData.testUserId)
+    .set("Authorization", `Bearer ${SeedData.adminUserToken.token}`)
+    .expect(200);
 });
 
 test("Should get all users paginated", async () => {
