@@ -29,8 +29,8 @@ export async function updateReportWithNew(jogging: joggingDocument): Promise<voi
 
 export async function updateReportWithOld(oldJogging: joggingDocument, newJogging: joggingDocument): Promise<void> {
   const oldReport = await getOrCreateReport(oldJogging);
-  oldReport.totalDistance -= oldJogging.distance;
-  oldReport.totalDuration -= oldJogging.duration;
+  if (oldReport.totalDistance > oldJogging.distance) oldReport.totalDistance -= oldJogging.distance;
+  if (oldReport.totalDuration > oldJogging.duration) oldReport.totalDuration -= oldJogging.duration;
   oldReport.avgSpeed = oldReport.totalDuration == 0 ? 0 : oldReport.totalDistance / oldReport.totalDuration;
   await oldReport.save();
 
@@ -45,8 +45,8 @@ export async function updateReportWithOld(oldJogging: joggingDocument, newJoggin
 
 export async function updateReportWithDeleted(jogging: joggingDocument): Promise<void> {
   const report = await getOrCreateReport(jogging);
-  report.totalDistance -= jogging.distance;
-  report.totalDuration -= jogging.duration;
+  if (report.totalDistance > jogging.distance) report.totalDistance -= jogging.distance;
+  if (report.totalDuration > jogging.duration) report.totalDuration -= jogging.duration;
   report.avgSpeed = report.totalDuration == 0 ? 0 : report.totalDistance / report.totalDuration;
   await report.save();
 }
