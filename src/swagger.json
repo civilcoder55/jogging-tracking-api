@@ -557,7 +557,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Check id",
+            "description": "User id",
             "required": true,
             "schema": {
               "type": "string"
@@ -1350,7 +1350,7 @@
         "properties": {
           "totalPages": {
             "title": "totalPages",
-            "description": "The total pages of check documents.",
+            "description": "The total pages of documents.",
             "type": "integer",
             "example": 3
           },
