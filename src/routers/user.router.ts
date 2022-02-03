@@ -20,8 +20,8 @@ router.get("/users/:id", authMiddleware, guardMiddleware([ROLES.MANAGER, ROLES.A
 router.patch(
   "/users/:id",
   authMiddleware,
-  validatorMiddleware(updateUserSchema),
   guardMiddleware([ROLES.MANAGER, ROLES.ADMIN]),
+  validatorMiddleware(updateUserSchema),
   userController.updateUser
 );
 router.delete("/users/:id", authMiddleware, guardMiddleware([ROLES.MANAGER, ROLES.ADMIN]), userController.deleteUser);
