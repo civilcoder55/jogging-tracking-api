@@ -1,5 +1,6 @@
 import { userDocument } from "../interfaces/user.interface";
 import joggingModel from "../models/jogging.model";
+import reportModel from "../models/report.model";
 import tokenModel from "../models/token.model";
 import userModel from "../models/user.model";
 import { paginator } from "../utils/paginator.utils";
@@ -61,5 +62,6 @@ export async function updateUser(user: userDocument, userData: userDocument): Pr
 export async function deleteUser(user: userDocument): Promise<void> {
   await tokenModel.deleteMany({ user: user._id });
   await joggingModel.deleteMany({ user: user._id });
+  await reportModel.deleteMany({ user: user._id });
   await user.remove();
 }
