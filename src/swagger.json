@@ -8,7 +8,11 @@
   "servers": [
     {
       "url": "http://localhost:3000/api/v1",
-      "description": "local API Server"
+      "description": "local API server"
+    },
+    {
+      "url": "https://jogging-tracking-api.herokuapp.com/api/v1",
+      "description": "live demo API server"
     }
   ],
   "paths": {
