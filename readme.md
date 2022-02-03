@@ -18,7 +18,6 @@ git clone https://github.com/civilcoder55/jogging-tracking-api.git
 
 2. make sure you have working mongodb instance
 
-
 3. update env file with proper variables
 
 ```sh
@@ -36,6 +35,7 @@ npm insatll
 ```sh
 npm run test
 ```
+
 5. to build app
 
 ```sh
@@ -97,6 +97,12 @@ http://localhost:3000/api/v1/docs
 ```sh
 docker logs -f jogging-app-nodejs
 ```
+
+## API Client Collection
+
+- click image to download insomnia api collection [can work with postman]
+
+[<img src="screenshots/insomnia.png" width="200px" height="200px">](https://raw.githubusercontent.com/civilcoder55/jogging-tracking-api/master/Insomnia_collection.json)
 
 ## screens
 
